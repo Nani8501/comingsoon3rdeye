@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>3rd Eye Filmer — Our New Website Is Coming Soon</title>
+<meta name="description" content="3rd Eye Filmer is a premium photography and cinematography studio in Hyderabad, capturing moments since 2016. Our new website is coming soon, but we are fully operational and taking bookings." />
+<meta name="theme-color" content="#0A0908" />
+<meta property="og:title" content="3rd Eye Filmer — New Website Coming Soon" />
+<meta property="og:description" content="Capturing Moments. Creating Memories. Since 2016. Our new website is on the way, but our photography and filmmaking services are available as usual." />
+<meta property="og:type" content="website" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0908;
+  --surface: #14110F;
+  --surface-2: #1C1815;
+  --ivory: #F5EDE0;
+  --ivory-dim: #D8CFC1;
+  --muted: #8A8175;
+  --gold: #C9A574;
+  --gold-bright: #D9B98A;
+  --bronze: #8B6B47;
+  --border: rgba(201, 165, 116, 0.15);
+  --border-strong: rgba(201, 165, 116, 0.3);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ivory);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display { font-family: 'Fraunces', serif; }
+.font-display-italic { font-family: 'Fraunces', serif; font-style: italic; }
+
+/* Atmospheric background */
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(139, 107, 71, 0.14), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(201, 165, 116, 0.08), transparent 60%),
+    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(20, 17, 15, 0.8), transparent 50%);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.content { position: relative; z-index: 2; }
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Logo styling */
+.brand-logo {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* mix-blend-mode: lighten makes the black background of the logo blend seamlessly into the page's dark charcoal background */
+  mix-blend-mode: lighten; 
+}
+.brand-logo:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 4px 12px rgba(201, 165, 116, 0.2));
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #1a1410;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.7s;
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 40px -10px rgba(201, 165, 116, 0.5); }
+
+.btn-outline {
+  border: 1px solid var(--border-strong);
+  background: rgba(20, 17, 15, 0.4);
+  color: var(--ivory);
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  background: rgba(201, 165, 116, 0.08);
+  color: var(--gold-bright);
+  transform: translateY(-1px);
+}
+
+.btn-whatsapp {
+  background: rgba(37, 211, 102, 0.1);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  color: #25D366;
+  transition: all 0.3s ease;
+}
+.btn-whatsapp:hover {
+  background: rgba(37, 211, 102, 0.15);
+  border-color: rgba(37, 211, 102, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px -10px rgba(37, 211, 102, 0.3);
+}
+
+/* Tag pill */
+.tag {
+  border: 1px solid var(--border);
+  background: rgba(20, 17, 15, 0.4);
+  transition: all 0.3s ease;
+}
+.tag:hover {
+  border-color: var(--border-strong);
+  background: rgba(201, 165, 116, 0.08);
+  color: var(--gold-bright);
+}
+
+/* Glass card */
+.glass {
+  background: rgba(15, 13, 11, 0.55);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(245, 237, 224, 0.08);
+  box-shadow: 
+    0 24px 60px -20px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(245, 237, 224, 0.05);
+}
+
+/* Image wrapper */
+.cinema-image {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+}
+.cinema-image img {
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cinema-image:hover img { transform: scale(1.04); }
+.cinema-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(10, 9, 8, 0.7) 100%);
+  pointer-events: none;
+}
+
+/* Input */
+.email-input {
+  background: rgba(245, 237, 224, 0.03);
+  border: 1px solid var(--border);
+  color: var(--ivory);
+  transition: all 0.3s ease;
+}
+.email-input::placeholder { color: var(--muted); }
+.email-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(245, 237, 224, 0.06);
+  box-shadow: 0 0 0 4px rgba(201, 165, 116, 0.1);
+}
+
+/* Vertical text */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.4em;
+}
+
+/* Divider */
+.divider-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+}
+
+/* Pulsing dot */
+.pulse-dot { position: relative; }
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.4;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Service card */
+.service-card {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(20,17,15,0.4), rgba(10,9,8,0.2));
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.service-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+  background: linear-gradient(180deg, rgba(40,32,26,0.5), rgba(20,17,15,0.3));
+}
+.service-card:hover .service-icon {
+  color: var(--gold-bright);
+  transform: scale(1.1);
+}
+.service-icon { transition: all 0.4s ease; }
+
+/* Contact card */
+.contact-card {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(20,17,15,0.6), rgba(10,9,8,0.3));
+  backdrop-filter: blur(10px);
+}
+
+/* Floating WhatsApp Button */
+.fab-whatsapp {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px -4px rgba(37, 211, 102, 0.5);
+  transition: all 0.3s ease;
+}
+.fab-whatsapp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25D366;
+  z-index: -1;
+  animation: whatsapp-pulse 2.5s ease-out infinite;
+}
+.fab-whatsapp:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 32px -4px rgba(37, 211, 102, 0.6);
+}
+.fab-whatsapp svg {
+  width: 28px;
+  height: 28px;
+  fill: white;
+}
+@keyframes whatsapp-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--bronze); }
+
+/* Messages */
+.message-success {
+  color: #9CC9AB;
+  background: rgba(124, 182, 143, 0.08);
+  border: 1px solid rgba(124, 182, 143, 0.3);
+}
+.message-error {
+  color: #D8A0A0;
+  background: rgba(216, 139, 139, 0.08);
+  border: 1px solid rgba(216, 139, 139, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="atmosphere"></div>
+<div class="grain"></div>
+
+<div class="content">
+
+<!-- Header -->
+<header class="relative px-6 md:px-12 lg:px-20 py-6 md:py-8 flex items-center justify-between border-b border-[rgba(201,165,116,0.08)]">
+  <a href="#" class="flex items-center group" aria-label="3rd Eye Filmer — Home">
+    <img 
+      src="logo.webp" 
+      alt="3rd Eye Filmer logo" 
+      class="brand-logo h-9 md:h-11 w-auto object-contain"
+    />
+  </a>
+  
+  <nav class="hidden md:flex items-center gap-8 text-sm text-[var(--ivory-dim)]" aria-label="Primary">
+    <a href="#vision" class="hover:text-[var(--gold)] transition">Vision</a>
+    <a href="#craft" class="hover:text-[var(--gold)] transition">Craft</a>
+    <a href="#contact" class="hover:text-[var(--gold)] transition">Contact</a>
+  </nav>
+  
+  <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border)] bg-[rgba(20,17,15,0.4)]">
+    <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-[var(--gold)]"></span>
+    <span class="text-xs uppercase tracking-[0.2em] text-[var(--ivory-dim)]">Open for Bookings</span>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="relative px-6 md:px-12 lg:px-20 py-10 md:py-16 lg:py-20">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+    
+    <!-- Left: Cinematic visual -->
+    <div class="lg:col-span-7 reveal">
+      <div class="relative">
+        <div class="cinema-image rounded-2xl overflow-hidden aspect-[4/5] lg:aspect-[5/6]">
+          <img 
+            src="hero.webp" 
+            alt="Photographer holding a professional camera at a traditional Indian wedding"
+            class="w-full h-full object-cover"
+            loading="eager"
+          />
+          <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(135deg, rgba(139, 107, 71, 0.18) 0%, transparent 50%, rgba(10, 9, 8, 0.45) 100%);"></div>
+          
+          <div class="absolute top-5 left-5 flex items-center gap-2 px-3 py-1.5 rounded-full bg-[rgba(10,9,8,0.6)] backdrop-blur border border-[rgba(245,237,224,0.1)]">
+            <span class="w-1 h-1 rounded-full bg-[var(--gold)]"></span>
+            <span class="text-[10px] uppercase tracking-[0.25em] text-[var(--ivory-dim)]">Frame 001 · Behind the Lens</span>
+          </div>
+          
+          <div class="absolute right-5 top-1/2 -translate-y-1/2 vertical-text text-[10px] uppercase tracking-[0.3em] text-[var(--ivory-dim)] opacity-60 hidden md:block">
+            3rd Eye · Cinematic Memory
+          </div>
+        </div>
+        
+        <!-- Floating glass card -->
+        <div class="glass absolute -bottom-8 left-6 md:left-10 right-6 md:right-auto md:max-w-sm rounded-xl p-5 md:p-6">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-lg bg-[rgba(201,165,116,0.12)] border border-[var(--border-strong)] flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-[var(--gold)]">
+                <path d="M9.5 2L8 6h8L14.5 2h-5z"/>
+                <path d="M3 6h18l-2 14H5L3 6z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-display-italic text-base md:text-lg leading-snug text-[var(--ivory)]">
+                "Every frame tells a story. We've been writing them since 2016."
+              </p>
+              <div class="mt-3 flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-[var(--muted)]">
+                <span class="w-6 h-px bg-[var(--gold)]"></span>
+                A note from the studio
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right: Brand + coming soon -->
+    <div class="lg:col-span-5 flex flex-col reveal lg:pt-4" style="transition-delay: 0.15s">
+      
+      <div class="mb-8">
+        <div class="flex items-baseline gap-3">
+          <span class="font-display text-2xl md:text-3xl tracking-tight">3rd Eye</span>
+          <span class="font-display-italic text-2xl md:text-3xl text-[var(--gold)]">Filmer</span>
+        </div>
+        <div class="divider-line mt-5 w-24"></div>
+      </div>
+      
+      <div class="inline-flex items-center gap-2 self-start mb-6 px-3 py-1.5 rounded-full border border-[var(--border-strong)] bg-[rgba(201,165,116,0.05)]">
+        <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-[var(--gold)]"></span>
+        <span class="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">Proudly Serving Since 2016</span>
+      </div>
+      
+      <h1 class="font-display text-[2.5rem] leading-[1.05] md:text-6xl md:leading-[1.02] font-light tracking-tight text-[var(--ivory)]">
+        Our New Website Is <span class="font-display-italic text-[var(--gold)]">Coming Soon</span>.
+      </h1>
+      
+      <p class="mt-6 font-display text-xl md:text-2xl leading-relaxed text-[var(--ivory)] max-w-md">
+        Capturing Moments. Creating Memories. Since 2016.
+      </p>
+      
+      <p class="mt-4 text-base md:text-lg leading-relaxed text-[var(--ivory-dim)] max-w-md">
+        We've been turning your precious moments into timeless memories since 2016. We're building a new online experience for you. Meanwhile, our photography and filmmaking services are available as usual.
+      </p>
+      
+      <div class="mt-7 flex flex-wrap gap-2">
+        <span class="tag px-4 py-1.5 rounded-full text-xs uppercase tracking-[0.18em] text-[var(--ivory-dim)]">Photography</span>
+        <span class="tag px-4 py-1.5 rounded-full text-xs uppercase tracking-[0.18em] text-[var(--ivory-dim)]">Cinematic Films</span>
+        <span class="tag px-4 py-1.5 rounded-full text-xs uppercase tracking-[0.18em] text-[var(--ivory-dim)]">Wedding Stories</span>
+      </div>
+      
+      <form id="notify-form" class="mt-9" novalidate>
+        <label for="email" class="block text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-3">
+          Be the first to know when we launch
+        </label>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            placeholder="you@studio.com" 
+            class="email-input flex-1 px-4 py-3.5 rounded-lg text-sm font-medium"
+            autocomplete="email"
+            required
+          />
+          <button type="submit" class="btn-primary px-6 py-3.5 rounded-lg text-sm font-semibold tracking-wide whitespace-nowrap">
+            Notify Me
+          </button>
+        </div>
+        <div id="form-message" class="mt-3 text-sm hidden px-4 py-3 rounded-lg"></div>
+        <p class="mt-3 text-xs text-[var(--muted)]">
+          We respect your inbox. No spam, just launch news.
+        </p>
+      </form>
+      
+      <div class="mt-8 pt-6 border-t border-[var(--border)]">
+        <a href="#contact" class="inline-flex items-center gap-2 text-sm text-[var(--ivory-dim)] hover:text-[var(--gold)] transition group">
+          <span>Ready to book?</span>
+          <span class="font-medium">Get in touch</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="group-hover:translate-x-1 transition-transform">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Studio Status Banner -->
+<section class="relative px-6 md:px-12 lg:px-20 py-12 border-y border-[var(--border)] mt-8">
+  <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-4">
+      <div class="w-10 h-10 rounded-full border border-[var(--border-strong)] flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-[var(--gold)]">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Established</div>
+        <div class="font-display text-xl text-[var(--ivory)]">Proudly Since 2016</div>
+      </div>
+    </div>
+    
+    <div class="hidden md:block h-12 w-px bg-[var(--border)]"></div>
+    
+    <div class="flex items-center gap-4">
+      <div class="w-10 h-10 rounded-full border border-[var(--border-strong)] flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-[var(--gold)]">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Status</div>
+        <div class="font-display text-xl text-[var(--ivory)]">New Website Coming</div>
+      </div>
+    </div>
+    
+    <div class="hidden md:block h-12 w-px bg-[var(--border)]"></div>
+    
+    <div class="flex items-center gap-4">
+      <div class="w-10 h-10 rounded-full border border-[var(--border-strong)] flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-[var(--gold)]">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">Operations</div>
+        <div class="font-display text-xl text-[var(--ivory)]">Open for Bookings</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vision / What We Do -->
+<section id="vision" class="relative px-6 md:px-12 lg:px-20 py-20">
+  <div class="max-w-6xl mx-auto">
+    
+    <div class="reveal mb-20">
+      <div class="text-xs uppercase tracking-[0.3em] text-[var(--gold)] mb-4">— Our Vision</div>
+      <h2 class="font-display text-3xl md:text-5xl leading-tight font-light max-w-3xl">
+        Turning <span class="font-display-italic text-[var(--gold)]">fleeting moments</span> into timeless memories.
+      </h2>
+      <p class="mt-6 text-[var(--ivory-dim)] max-w-2xl leading-relaxed">
+        Every wedding, every portrait, every frame is approached with intention. We don't just photograph — we preserve emotion, light, and the spaces in between.
+      </p>
+    </div>
+    
+    <div id="craft" class="reveal">
+      <div class="flex items-center gap-4 mb-8">
+        <span class="text-xs uppercase tracking-[0.3em] text-[var(--gold)] whitespace-nowrap">— What We Do</span>
+        <span class="h-px flex-1 bg-[var(--border)]"></span>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="service-card rounded-xl p-6">
+          <div class="service-icon mb-4 text-[var(--muted)]">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+              <circle cx="12" cy="13" r="3"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg text-[var(--ivory)] mb-1">Wedding Photography</h3>
+          <p class="text-sm text-[var(--muted)]">Documenting the day, frame by frame.</p>
+        </div>
+        
+        <div class="service-card rounded-xl p-6">
+          <div class="service-icon mb-4 text-[var(--muted)]">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <rect x="2" y="6" width="14" height="12" rx="2"/>
+              <path d="M16 10l6-3v10l-6-3z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg text-[var(--ivory)] mb-1">Wedding Films</h3>
+          <p class="text-sm text-[var(--muted)]">Cinematic narratives that move.</p>
+        </div>
+        
+        <div class="service-card rounded-xl p-6">
+          <div class="service-icon mb-4 text-[var(--muted)]">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <path d="M22 4L12 14.01l-3-3"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg text-[var(--ivory)] mb-1">Event Coverage</h3>
+          <p class="text-sm text-[var(--muted)]">From intimate to grand, fully captured.</p>
+        </div>
+        
+        <div class="service-card rounded-xl p-6">
+          <div class="service-icon mb-4 text-[var(--muted)]">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 21v-1a7 7 0 0 1 14 0v1"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg text-[var(--ivory)] mb-1">Portrait Photography</h3>
+          <p class="text-sm text-[var(--muted)]">Faces, presence, and quiet character.</p>
+        </div>
+        
+        <div class="service-card rounded-xl p-6">
+          <div class="service-icon mb-4 text-[var(--muted)]">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg text-[var(--ivory)] mb-1">Pre-Wedding Shoots</h3>
+          <p class="text-sm text-[var(--muted)]">Stories told before the day arrives.</p>
+        </div>
+        
+        <div class="service-card rounded-xl p-6">
+          <div class="service-icon mb-4 text-[var(--muted)]">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+              <path d="M2 4l8 8-8 8V4zM14 4l8 8-8 8V4z"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-lg text-[var(--ivory)] mb-1">Cinematic Videography</h3>
+          <p class="text-sm text-[var(--muted)]">Films with weight, light, and rhythm.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="relative px-6 md:px-12 lg:px-20 py-20 border-t border-[var(--border)]">
+  <div class="max-w-5xl mx-auto">
+    <div class="reveal">
+      <div class="text-xs uppercase tracking-[0.3em] text-[var(--gold)] mb-4">— Studio Contact</div>
+      <h2 class="font-display text-3xl md:text-5xl leading-tight font-light max-w-3xl mb-4">
+        Let's create something <span class="font-display-italic text-[var(--gold)]">memorable</span>.
+      </h2>
+      <p class="text-[var(--ivory-dim)] max-w-2xl leading-relaxed mb-12">
+        Reach out for bookings, collaborations, or just to say hello. We're based in Hyderabad and available for projects across India.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 reveal">
+      
+      <!-- Address card -->
+      <div class="contact-card rounded-xl p-6">
+        <div class="w-10 h-10 rounded-lg bg-[rgba(201,165,116,0.12)] border border-[var(--border-strong)] flex items-center justify-center mb-4">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-[var(--gold)]">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-2">Visit the Studio</div>
+        <address class="not-italic text-sm leading-relaxed text-[var(--ivory-dim)]">
+          Chaitanyapuri First Bus Stop,<br/>
+          Ramkrishna Raju Residency,<br/>
+          MCH Colony, Kothapet,<br/>
+          Hyderabad, Telangana – 500060
+        </address>
+        <a 
+          href="https://www.google.com/maps/search/?api=1&query=Chaitanyapuri+First+Bus+Stop+Ramkrishna+Raju+Residency+MCH+Colony+Kothapet+Hyderabad+Telangana+500060" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 mt-4 text-xs uppercase tracking-[0.2em] text-[var(--gold)] hover:text-[var(--gold-bright)] transition group"
+        >
+          Get Directions
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="group-hover:translate-x-1 transition-transform">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      </div>
+      
+      <!-- Phone card -->
+      <div class="contact-card rounded-xl p-6">
+        <div class="w-10 h-10 rounded-lg bg-[rgba(201,165,116,0.12)] border border-[var(--border-strong)] flex items-center justify-center mb-4">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-[var(--gold)]">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        <div class="text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-2">Call the Studio</div>
+        <a 
+          href="tel:+919000316953" 
+          class="block font-display text-xl text-[var(--ivory)] hover:text-[var(--gold)] transition"
+        >
+          +91 90003 16953
+        </a>
+        <p class="text-xs text-[var(--muted)] mt-2">Mon–Sat · 10am – 7pm IST</p>
+        <a 
+          href="tel:+919000316953"
+          class="inline-flex items-center gap-1.5 mt-4 text-xs uppercase tracking-[0.2em] text-[var(--gold)] hover:text-[var(--gold-bright)] transition group"
+        >
+          Call Now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="group-hover:translate-x-1 transition-transform">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      </div>
+      
+      <!-- WhatsApp card -->
+      <div class="contact-card rounded-xl p-6">
+        <div class="w-10 h-10 rounded-lg bg-[rgba(37,211,102,0.1)] border border-[rgba(37,211,102,0.3)] flex items-center justify-center mb-4">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-[#25D366]">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+          </svg>
+        </div>
+        <div class="text-xs uppercase tracking-[0.25em] text-[var(--muted)] mb-2">Chat on WhatsApp</div>
+        <p class="text-sm text-[var(--ivory-dim)] leading-relaxed">
+          Quick questions, project briefs, or share references — message us anytime.
+        </p>
+        <a 
+          href="https://wa.me/919000316953?text=Hi%203rd%20Eye%20Filmer%2C%20I'd%20like%20to%20enquire%20about%20your%20services." 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn-whatsapp inline-flex items-center gap-2 mt-4 px-4 py-2.5 rounded-lg text-xs uppercase tracking-[0.2em] font-semibold"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+          </svg>
+          Message Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="relative px-6 md:px-12 lg:px-20 py-10 border-t border-[var(--border)]">
+  <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+    <a href="#" class="flex items-center group" aria-label="3rd Eye Filmer — Home">
+      <img 
+        src="logo.webp" 
+        alt="3rd Eye Filmer logo"
+        class="brand-logo h-8 md:h-10 w-auto object-contain"
+      />
+    </a>
+    
+    <div class="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-xs text-[var(--muted)]">
+      <a href="tel:+919000316953" class="hover:text-[var(--gold)] transition">+91 90003 16953</a>
+      <span class="hidden md:inline">·</span>
+      <a 
+        href="https://www.google.com/maps/search/?api=1&query=Chaitanyapuri+First+Bus+Stop+Ramkrishna+Raju+Residency+MCH+Colony+Kothapet+Hyderabad+Telangana+500060" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="hover:text-[var(--gold)] transition"
+      >
+        Kothapet, Hyderabad
+      </a>
+      <span class="hidden md:inline">·</span>
+      <span>© 2025 3rd Eye Filmer. Since 2016.</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<!-- Floating WhatsApp Button -->
+<a 
+  href="https://wa.me/919000316953?text=Hi%203rd%20Eye%20Filmer%2C%20I'd%20like%20to%20enquire%20about%20your%20services." 
+  target="_blank" 
+  rel="noopener noreferrer"
+  class="fab-whatsapp"
+  aria-label="Chat with us on WhatsApp"
+>
+  <svg viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Email form
+const form = document.getElementById('notify-form');
+const message = document.getElementById('form-message');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  if (!email) {
+    showMessage('Please enter your email address.', 'error');
+    return;
+  }
+  
+  if (!emailRegex.test(email)) {
+    showMessage('Please enter a valid email address.', 'error');
+    return;
+  }
+  
+  const button = form.querySelector('button[type="submit"]');
+  const originalText = button.textContent;
+  button.textContent = 'Sending...';
+  button.disabled = true;
+  
+  // NOTE: Replace with real endpoint integration when backend is available.
+  setTimeout(() => {
+    button.textContent = originalText;
+    button.disabled = false;
+    form.reset();
+    showMessage("You're on the list. We'll be in touch when the new website goes live.", 'success');
+  }, 900);
+});
+
+function showMessage(text, type) {
+  message.textContent = text;
+  message.className = `mt-3 text-sm px-4 py-3 rounded-lg ${type === 'success' ? 'message-success' : 'message-error'}`;
+  message.classList.remove('hidden');
+  
+  if (type === 'success') {
+    setTimeout(() => {
+      message.classList.add('hidden');
+    }, 6000);
+  }
+}
+</script>
+
+</body>
+</html>
